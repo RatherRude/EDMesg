@@ -1,5 +1,5 @@
 [project]
-name = EDMesg
+name = "EDMesg"
 version = "2024.10.17"
 dependencies = [
   "pyzmq>=26.2.0",
