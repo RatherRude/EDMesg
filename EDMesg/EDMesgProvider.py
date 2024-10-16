@@ -13,7 +13,9 @@ class EDMesgProvider:
         self, 
         provider_name: str, 
         action_types: List[Type[EDMesgAction]], 
-        event_types: List[Type[EDMesgEvent]]
+        event_types: List[Type[EDMesgEvent]],
+        action_port: int,
+        event_port: int
     ):
         self.provider_name = provider_name
         self.context = zmq.Context()
@@ -29,11 +31,13 @@ class EDMesgProvider:
 
         # Publisher socket for events
         self.pub_socket = self.context.socket(zmq.PUB)
-        self.pub_socket.bind(f"ipc://{self.pub_socket_path}")
+        #self.pub_socket.bind(f"ipc://{self.pub_socket_path}")
+        self.pub_socket.bind(f"tcp://127.0.0.1:{event_port}")
 
         # Pull socket for actions
         self.pull_socket = self.context.socket(zmq.PULL)
-        self.pull_socket.bind(f"ipc://{self.pull_socket_path}")
+        #self.pull_socket.bind(f"ipc://{self.pull_socket_path}")
+        self.pull_socket.bind(f"tcp://127.0.0.1:{action_port}")
 
         # Queues for pending actions
         self.pending_actions = Queue()

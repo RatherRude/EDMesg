@@ -14,6 +14,8 @@ class SpeakAction(EDMesgAction):
 provider_name = "COVAS_NEXT"
 actions = [SpeakAction]
 events = []
+actions_port = 15550
+events_port = 15551
 
 def create_covasnext_provider() -> EDMesgProvider:
     return EDMesgProvider(

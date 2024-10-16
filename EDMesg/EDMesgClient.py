@@ -12,7 +12,9 @@ class EDMesgClient:
         self, 
         provider_name: str, 
         action_types: List[Type[EDMesgAction]], 
-        event_types: List[Type[EDMesgEvent]]
+        event_types: List[Type[EDMesgEvent]],
+        action_port: int,
+        event_port: int
     ):
         self.provider_name = provider_name
         self.context = zmq.Context()
@@ -23,11 +25,13 @@ class EDMesgClient:
 
         # Push socket for actions
         self.push_socket = self.context.socket(zmq.PUSH)
-        self.push_socket.connect(f"ipc://{self.pull_socket_path}")
+        #self.push_socket.connect(f"ipc://{self.pull_socket_path}")
+        self.push_socket.connect(f"tcp://127.0.0.1:{action_port}")
 
         # Subscriber socket for events
         self.sub_socket = self.context.socket(zmq.SUB)
-        self.sub_socket.connect(f"ipc://{self.pub_socket_path}")
+        #self.sub_socket.connect(f"ipc://{self.pub_socket_path}")
+        self.sub_socket.connect(f"tcp://127.0.0.1:{event_port}")
         self.sub_socket.setsockopt_string(zmq.SUBSCRIBE, '')  # Subscribe to all topics
 
         # Queues for pending events
