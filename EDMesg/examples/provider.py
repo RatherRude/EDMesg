@@ -1,7 +1,8 @@
-from .. import (
+from ..EDCoPilot import (
     create_edcopilot_provider, 
     SpeakingPhraseEvent, 
-    OpenPanelAction
+    OpenPanelAction,
+    SpeakThisAction
 )
 from time import sleep, time
 
@@ -26,6 +27,8 @@ def main():
                 action = provider.pending_actions.get()
                 if isinstance(action, OpenPanelAction):
                     open_panel(action.name)
+                if isinstance(action, SpeakThisAction):
+                    print('SpeakThis: ', action.text)
             sleep(0.1)
     except KeyboardInterrupt:
         print("Shutting down provider.")

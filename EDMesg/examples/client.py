@@ -1,7 +1,8 @@
-from .. import (
+from ..EDCoPilot import (
     create_edcopilot_client, 
     OpenPanelAction,
-    SpeakingPhraseEvent
+    SpeakingPhraseEvent,
+    SpeakThisAction
 )
 from time import sleep, time
 
@@ -20,7 +21,7 @@ def main():
         while True:
             current_time = time()
             if current_time - last_action_time >= 10:
-                client.publish(OpenPanelAction(name="Voice Activity"))
+                client.publish(SpeakThisAction(text="Hey how are you?"))
                 last_action_time = current_time
 
             if not client.pending_events.empty():
