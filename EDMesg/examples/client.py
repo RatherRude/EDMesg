@@ -1,6 +1,6 @@
 from .. import (
     create_edcopilot_client, 
-    OpenPanelAction, 
+    OpenPanelAction,
     SpeakingPhraseEvent
 )
 from time import sleep, time
