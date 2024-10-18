@@ -15,6 +15,7 @@ class PrintThisAction(EDMesgAction):
 class SpeakingPhraseEvent(EDMesgEvent):
     text: str
     duration: float
+    timestamp: str
 
 class BookmarkAttributes(BaseModel):
     has_landable_planets: bool
