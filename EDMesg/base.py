@@ -4,12 +4,10 @@ from pydantic import BaseModel
 from typing import Dict, Any
 
 class EDMesgAction(BaseModel, ABC):
-    class Config:
-        orm_mode = True
+    pass
 
 class EDMesgEvent(BaseModel, ABC):
-    class Config:
-        orm_mode = True
+    pass
 
 class EDMesgEnvelope(BaseModel):
     type: str
