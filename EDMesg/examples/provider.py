@@ -20,7 +20,7 @@ def main():
         while True:
             current_time = time()
             if current_time - last_event_time >= 5:
-                provider.publish(SpeakingPhraseEvent(text="I am talking every 5 second for 3.1 seconds duration", duration=3.1))
+                provider.publish(SpeakingPhraseEvent(text="I am talking every 5 second for 3.1 seconds duration", duration=3.1, timestamp="2021-09-01T12:00:00Z"))
                 last_event_time = current_time
 
             if not provider.pending_actions.empty():
