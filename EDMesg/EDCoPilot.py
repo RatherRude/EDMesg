@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
