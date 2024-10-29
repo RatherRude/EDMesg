@@ -23,12 +23,16 @@ def create_covasnext_provider() -> EDMesgProvider:
     return EDMesgProvider(
         provider_name=provider_name,
         action_types=actions,
-        event_types=events
+        event_types=events,
+        action_port=actions_port,
+        event_port=events_port
     )
 
 def create_covasnext_client() -> EDMesgClient:
     return EDMesgClient(
         provider_name=provider_name,
         action_types=actions,
-        event_types=events
+        event_types=events,
+        action_port=actions_port,
+        event_port=events_port
     )
