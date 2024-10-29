@@ -10,10 +10,19 @@ class SpeakAction(EDMesgAction):
     pass
 
 
+class AssistantReplied(EDMesgEvent):
+    muted: bool
+    reason: Union[Literal["user"], str]
+    text: str
+
+class UserSpoke(EDMesgEvent):
+    muted: bool
+    text: str
+
 # Factory methods
 provider_name = "COVAS_NEXT"
 actions = [SpeakAction]
-events = []
+events = [AssistantReplied, UserSpoke]
 actions_port = 15550
 events_port = 15551
 
