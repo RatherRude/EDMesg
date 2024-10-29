@@ -1,28 +1,21 @@
-from typing import List, TypedDict
+from typing import List, TypedDict, Union, Literal
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
 from .EDMesgClient import EDMesgClient
 
-class SpeakAction(EDMesgAction):
-    """
-    Forces the AI to generate commentary on the current state of the game.
-    """
-    pass
-
-
-class AssistantReplied(EDMesgEvent):
+class CovasReplied(EDMesgEvent):
     muted: bool
-    reason: Union[Literal["user"], str]
+    reasons: List[Union[Literal["user"], str]]
     text: str
 
-class UserSpoke(EDMesgEvent):
+class CommanderSpoke(EDMesgEvent):
     muted: bool
     text: str
 
 # Factory methods
 provider_name = "COVAS_NEXT"
-actions = [SpeakAction]
-events = [AssistantReplied, UserSpoke]
+actions = []
+events = [CovasReplied, CommanderSpoke]
 actions_port = 15550
 events_port = 15551
 
