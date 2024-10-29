@@ -6,16 +6,15 @@ from .EDMesgClient import EDMesgClient
 class OpenPanelAction(EDMesgAction):
     name: str
 
-class SpeakThisAction(EDMesgAction):
-    text: str
-
-class PrintThisAction(EDMesgAction):
-    text: str
-
 class SpeakingPhraseEvent(EDMesgEvent):
     text: str
+    reason: str
     duration: float
     timestamp: str
+
+class PanelOpenedEvent(EDMesgEvent):
+    name: str
+    contents: Optional[str]
 
 class BookmarkAttributes(BaseModel):
     has_landable_planets: bool
@@ -31,12 +30,10 @@ class Bookmark(BaseModel):
 class DisplayBookmarksPanelEvent(EDMesgEvent):
     bookmarks: list[Bookmark]
 
-
-
 # Factory methods
 provider_name = "EDCoPilot"
-actions = [OpenPanelAction, PrintThisAction, SpeakThisAction]
-events = [SpeakingPhraseEvent]
+actions = [OpenPanelAction]
+events = [SpeakingPhraseEvent, PanelOpenedEvent, DisplayBookmarksPanelEvent]
 actions_port = 15560
 events_port = 15561
 
