@@ -6,6 +6,9 @@ from .EDMesgClient import EDMesgClient
 
 class OpenPanelAction(EDMesgAction):
     name: str
+    
+class PrintThisAction(EDMesgAction):
+    text: str
 
 class SpeakingPhraseEvent(EDMesgEvent):
     text: str
