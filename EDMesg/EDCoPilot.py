@@ -36,7 +36,7 @@ class DisplayBookmarksPanelEvent(EDMesgEvent):
 
 # Factory methods
 provider_name = "EDCoPilot"
-actions = [OpenPanelAction]
+actions = [OpenPanelAction, PrintThisAction]
 events = [SpeakingPhraseEvent, PanelOpenedEvent, DisplayBookmarksPanelEvent]
 actions_port = 15560
 events_port = 15561
