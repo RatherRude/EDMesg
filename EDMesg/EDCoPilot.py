@@ -15,23 +15,29 @@ class SpeakingPhraseEvent(EDMesgEvent):
     reason: str
     duration: float
     timestamp: str
+    muted: bool
 
-class PanelOpenedEvent(EDMesgEvent):
+class InformationEvent(EDMesgEvent):
+    text: str
+    reasons: list[reason]
+    timestamp: str
+
+class PanelOpenedEvent(EDMesgEvent): # placeholder for future?
     name: str
     contents: Optional[str]
 
-class BookmarkAttributes(BaseModel):
+class BookmarkAttributes(BaseModel): # placeholder for future?
     has_landable_planets: bool
     has_atmosphere: bool
 
-class Bookmark(BaseModel):
+class Bookmark(BaseModel): # placeholder for future?
     number: int
     system_name: str
     last_visit: str
     number_of_visits: int
     attributes: BookmarkAttributes
 
-class DisplayBookmarksPanelEvent(EDMesgEvent):
+class DisplayBookmarksPanelEvent(EDMesgEvent): # placeholder for future?
     bookmarks: list[Bookmark]
 
 # Factory methods
