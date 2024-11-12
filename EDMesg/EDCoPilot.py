@@ -15,11 +15,11 @@ class SpeakingPhraseEvent(EDMesgEvent):
     reason: str
     duration: float
     timestamp: str
-    muted: bool
-
+    muted: Optional[str]
+    
 class InformationEvent(EDMesgEvent):
     text: str
-    reasons: list[reason]
+    reason: str
     timestamp: str
 
 class PanelOpenedEvent(EDMesgEvent): # placeholder for future?
@@ -43,7 +43,7 @@ class DisplayBookmarksPanelEvent(EDMesgEvent): # placeholder for future?
 # Factory methods
 provider_name = "EDCoPilot"
 actions = [OpenPanelAction, PrintThisAction]
-events = [SpeakingPhraseEvent, PanelOpenedEvent, DisplayBookmarksPanelEvent]
+events = [SpeakingPhraseEvent, InformationEvent, PanelOpenedEvent, DisplayBookmarksPanelEvent]
 actions_port = 15560
 events_port = 15561
 
