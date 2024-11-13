@@ -17,10 +17,10 @@ class SpeakingPhraseEvent(EDMesgEvent):
     timestamp: str
     muted: Optional[str]
     
-class InformationEvent(EDMesgEvent):
-    text: str
-    reason: str
-    timestamp: str
+class LastVisitedEvent(EDMesgEvent):
+    days_since_last_here: int
+    visit_number: int
+    passed_through_count: int
 
 class PanelOpenedEvent(EDMesgEvent): # placeholder for future?
     name: str
