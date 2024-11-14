@@ -15,7 +15,6 @@ class SpeakingPhraseEvent(EDMesgEvent):
     reason: str
     duration: float
     timestamp: str
-    muted: Optional[str]
     
 class LastVisitedEvent(EDMesgEvent):
     days_since_last_here: int
