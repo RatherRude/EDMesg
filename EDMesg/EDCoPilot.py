@@ -20,6 +20,7 @@ class LastVisitedEvent(EDMesgEvent):
     days_since_last_here: int
     visit_number: int
     passed_through_count: int
+    timestamp: str
 
 class PanelOpenedEvent(EDMesgEvent): # placeholder for future?
     name: str
