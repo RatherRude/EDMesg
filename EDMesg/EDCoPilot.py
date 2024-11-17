@@ -17,7 +17,7 @@ class SpeakingPhraseEvent(EDMesgEvent):
     timestamp: str
     
 class LastVisitedEvent(EDMesgEvent):
-    days_since_last_here: int
+    days_since_last_here: float
     visit_number: int
     passed_through_count: int
     timestamp: str
