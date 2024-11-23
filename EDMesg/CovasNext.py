@@ -23,7 +23,7 @@ class ConfigurationUpdated(EDMesgEvent):
 # Factory methods
 provider_name = "COVAS_NEXT"
 actions: list[type[EDMesgAction]] = []
-events: list[type[EDMesgEvent]] = [CovasReplied, CommanderSpoke]
+events: list[type[EDMesgEvent]] = [CovasReplied, CommanderSpoke, ConfigurationUpdated]
 actions_port = 15550
 events_port = 15551
 
