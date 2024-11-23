@@ -4,41 +4,47 @@ from queue import Queue
 from time import sleep
 import os
 import tempfile
-from typing import List, Type
-from .base import EDMesgEvent, EDMesgAction, EDMesgEnvelope
+from typing import Any, final
+from .base import EDMesgEvent, EDMesgAction, EDMesgEnvelope, EDMesgWelcomeAction
 
+
+@final
 class EDMesgClient:
     def __init__(
-        self, 
-        provider_name: str, 
-        action_types: List[Type[EDMesgAction]], 
-        event_types: List[Type[EDMesgEvent]],
+        self,
+        provider_name: str,
+        action_types: list[type[EDMesgAction]],
+        event_types: list[type[EDMesgEvent]],
         action_port: int,
-        event_port: int
+        event_port: int,
     ):
         self.provider_name = provider_name
         self.context = zmq.Context()
 
         # Generate socket file paths based on provider's name
-        self.pub_socket_path = os.path.join(tempfile.gettempdir(), f"edmesg_{self.provider_name}_pub.ipc")
-        self.pull_socket_path = os.path.join(tempfile.gettempdir(), f"edmesg_{self.provider_name}_pull.ipc")
+        self.pub_socket_path = os.path.join(
+            tempfile.gettempdir(), f"edmesg_{self.provider_name}_pub.ipc"
+        )
+        self.pull_socket_path = os.path.join(
+            tempfile.gettempdir(), f"edmesg_{self.provider_name}_pull.ipc"
+        )
 
         # Push socket for actions
         self.push_socket = self.context.socket(zmq.PUSH)
-        #self.push_socket.connect(f"ipc://{self.pull_socket_path}")
+        # self.push_socket.connect(f"ipc://{self.pull_socket_path}")
         self.push_socket.connect(f"tcp://127.0.0.1:{action_port}")
 
         # Subscriber socket for events
         self.sub_socket = self.context.socket(zmq.SUB)
-        #self.sub_socket.connect(f"ipc://{self.pub_socket_path}")
+        # self.sub_socket.connect(f"ipc://{self.pub_socket_path}")
         self.sub_socket.connect(f"tcp://127.0.0.1:{event_port}")
-        self.sub_socket.setsockopt_string(zmq.SUBSCRIBE, '')  # Subscribe to all topics
+        self.sub_socket.setsockopt_string(zmq.SUBSCRIBE, "")  # Subscribe to all topics
 
         # Queues for pending events
-        self.pending_events = Queue()
+        self.pending_events: Queue[EDMesgEvent] = Queue()
 
         # Store action and event types
-        self.action_types = action_types
+        self.action_types = [EDMesgWelcomeAction] + action_types
         self.event_types = event_types
 
         # Start thread to listen for events
@@ -48,8 +54,7 @@ class EDMesgClient:
 
     def publish(self, action: EDMesgAction):
         envelope = EDMesgEnvelope(
-            type=action.__class__.__name__,
-            data=action.model_dump()
+            type=action.__class__.__name__, data=action.model_dump()
         )
         message = envelope.model_dump_json()
         self.push_socket.send_string(message)
@@ -70,7 +75,9 @@ class EDMesgClient:
                 print(f"Error in _listen_events: {e}")
                 sleep(0.1)
 
-    def _instantiate_event(self, type_name: str, data: dict) -> Type[EDMesgEvent]:
+    def _instantiate_event(
+        self, type_name: str, data: dict[str, Any]
+    ) -> EDMesgEvent | None:
         for event_class in self.event_types:
             if event_class.__name__ == type_name:
                 return event_class(**data)
