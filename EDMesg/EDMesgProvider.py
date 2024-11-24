@@ -4,7 +4,7 @@ from queue import Queue
 from time import sleep
 import os
 import tempfile
-from typing import Any, final
+from typing import Any, final, Optional
 
 from .base import EDMesgEvent, EDMesgAction, EDMesgEnvelope, EDMesgWelcomeAction
 
