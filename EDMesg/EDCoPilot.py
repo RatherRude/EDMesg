@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
 from .EDMesgClient import EDMesgClient
+from typing import Optional
 
 
 class OpenPanelAction(EDMesgAction):
@@ -28,7 +29,7 @@ class LastVisitedEvent(EDMesgEvent):
 
 class PanelOpenedEvent(EDMesgEvent):  # placeholder for future?
     name: str
-    contents: str | None
+    contents: Optional[str]
 
 
 class BookmarkAttributes(BaseModel):  # placeholder for future?
