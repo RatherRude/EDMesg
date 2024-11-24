@@ -93,7 +93,7 @@ class EDMesgProvider:
 
     def _instantiate_action(
         self, type_name: str, data: dict[str, Any]
-    ) -> EDMesgAction | None:
+    ) -> Optional(EDMesgAction):
         for action_class in self.action_types:
             if action_class.__name__ == type_name:
                 return action_class(**data)
