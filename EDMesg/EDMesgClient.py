@@ -4,7 +4,7 @@ from queue import Queue
 from time import sleep
 import os
 import tempfile
-from typing import Any, final
+from typing import Any, final, Optional
 from .base import EDMesgEvent, EDMesgAction, EDMesgEnvelope, EDMesgWelcomeAction
 
 
@@ -77,7 +77,7 @@ class EDMesgClient:
 
     def _instantiate_event(
         self, type_name: str, data: dict[str, Any]
-    ) -> EDMesgEvent | None:
+    ) -> Optional[EDMesgEvent]:
         for event_class in self.event_types:
             if event_class.__name__ == type_name:
                 return event_class(**data)
