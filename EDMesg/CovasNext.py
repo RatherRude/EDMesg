@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import List, Literal, Union
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
 from .EDMesgClient import EDMesgClient
@@ -6,7 +6,7 @@ from .EDMesgClient import EDMesgClient
 
 class CovasReplied(EDMesgEvent):
     muted: bool
-    reasons: list[Literal["user"] | str]
+    reasons: List[Union[Literal["user"], str]]
     text: str
 
 
