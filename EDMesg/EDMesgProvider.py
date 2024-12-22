@@ -75,7 +75,6 @@ class EDMesgProvider:
         )
         message = envelope.model_dump_json()
         self.pub_socket.send_string(message)
-        print("sending message", message)
 
     def _listen_actions(self):
         while self._running:
@@ -94,7 +93,6 @@ class EDMesgProvider:
                 sleep(0.1)
 
     def _listen_status(self):
-        print('listening status')
         while self._running:
             try:
                 client = self.pub_monitor.recv_string(flags=zmq.NOBLOCK)
@@ -105,7 +103,6 @@ class EDMesgProvider:
             except Exception as e:
                 print(f"Error in _listen_actions: {e}")
                 sleep(0.1)
-        print('stop listening status')
 
     def _instantiate_action(
         self, type_name: str, data: dict[str, Any]
