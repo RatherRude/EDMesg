@@ -41,7 +41,7 @@ class EDMesgProvider:
         self.pub_socket.bind(f"tcp://127.0.0.1:{event_port}")
 
         self.pub_monitor = self.pub_socket.get_monitor_socket(
-            zmq.EVENT_HANDSHAKE_SUCCEEDED
+            zmq.Event.HANDSHAKE_SUCCEEDED
         )
 
         # Pull socket for actions
@@ -63,6 +63,12 @@ class EDMesgProvider:
         )
         self.listener_thread.start()
 
+        # Start thread to listen for status messages
+        self.status_thread = threading.Thread(
+            target=self._listen_status, daemon=True
+        )
+        self.status_thread.start()
+
     def publish(self, event: EDMesgEvent):
         envelope = EDMesgEnvelope(
             type=event.__class__.__name__, data=event.model_dump()
@@ -81,7 +87,16 @@ class EDMesgProvider:
                     self.pending_actions.put(action)
                 else:
                     print(f"Unknown action type received: {envelope.type}")
+            except zmq.Again:
+                sleep(0.01)  # Prevent busy waiting
+            except Exception as e:
+                print(f"Error in _listen_actions: {e}")
+                sleep(0.1)
 
+    def _listen_status(self):
+        print('listening status')
+        while self._running:
+            try:
                 client = self.pub_monitor.recv_string(flags=zmq.NOBLOCK)
                 if client:
                     self.pending_actions.put(EDMesgWelcomeAction())
@@ -90,6 +105,7 @@ class EDMesgProvider:
             except Exception as e:
                 print(f"Error in _listen_actions: {e}")
                 sleep(0.1)
+        print('stop listening status')
 
     def _instantiate_action(
         self, type_name: str, data: dict[str, Any]
@@ -101,10 +117,12 @@ class EDMesgProvider:
 
     def close(self):
         self._running = False
-        self.listener_thread.join()
         self.pub_socket.close()
         self.pull_socket.close()
+        self.pub_monitor.close()
         self.context.term()
+        self.listener_thread.join()
+        self.status_thread.join()
 
         # Clean up socket files
         for path in [self.pub_socket_path, self.pull_socket_path]:
