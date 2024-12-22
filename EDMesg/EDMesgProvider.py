@@ -101,7 +101,7 @@ class EDMesgProvider:
             except zmq.Again:
                 sleep(0.01)  # Prevent busy waiting
             except Exception as e:
-                print(f"Error in _listen_actions: {e}")
+                print(f"Error in _listen_status: {e}")
                 sleep(0.1)
 
     def _instantiate_action(
