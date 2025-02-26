@@ -2,20 +2,24 @@ from pydantic import BaseModel
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
 from .EDMesgClient import EDMesgClient
-from typing import Optional
+from typing import Optional, Union, Literal, Dict
 
 
 class OpenPanelAction(EDMesgAction):
-    name: str
-
-
-class PrintThisAction(EDMesgAction):
-    text: str
+    panelName: Literal["bookmarks","voicelog", "activity"]
 
 
 class SpeakingPhraseEvent(EDMesgEvent):
     text: str
-    reason: str
+    reason: Union[str, Literal[
+        "ArrivedAtDesination", # when reached system that was plotted to
+        "ArrivedHome", # when reached system that is designated a home system
+        "ChitChat", # ship chit-chat
+        "FacilitySystemReminder", # when reached system that was recommended to visit a particular facility (eg after a search)
+        "FirstVisitToStation", # when docked at station for first time
+        "HGE", # candidate system for HGEs
+        "LastHere", # when reaching a destination system
+    ]]
     duration: float
     timestamp: str
 
@@ -25,11 +29,6 @@ class LastVisitedEvent(EDMesgEvent):
     visit_number: int
     passed_through_count: int
     timestamp: str
-
-
-class PanelOpenedEvent(EDMesgEvent):  # placeholder for future?
-    name: str
-    contents: Optional[str]
 
 
 class BookmarkAttributes(BaseModel):  # placeholder for future?
@@ -49,9 +48,13 @@ class DisplayBookmarksPanelEvent(EDMesgEvent):  # placeholder for future?
     bookmarks: list[Bookmark]
 
 
+class PanelOpenedEvent(EDMesgEvent):  # placeholder for future?
+    name: str
+    contents: Optional[Dict[str, any]]
+
 # Factory methods
 provider_name = "EDCoPilot"
-actions: list[type[EDMesgAction]] = [OpenPanelAction, PrintThisAction]
+actions: list[type[EDMesgAction]] = [OpenPanelAction]
 events: list[type[EDMesgEvent]] = [
     SpeakingPhraseEvent,
     LastVisitedEvent,
