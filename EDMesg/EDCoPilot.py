@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
 from .EDMesgClient import EDMesgClient
-from typing import Optional, Union, Literal, Dict
+from typing_extensions import Optional, Literal, Union, Dict, Any
 
 
 class OpenPanelAction(EDMesgAction):
@@ -50,7 +50,7 @@ class DisplayBookmarksPanelEvent(EDMesgEvent):  # placeholder for future?
 
 class PanelOpenedEvent(EDMesgEvent):  # placeholder for future?
     name: str
-    contents: Optional[Dict[str, any]]
+    contents: Optional[Dict[str, Any]]
 
 # Factory methods
 provider_name = "EDCoPilot"
