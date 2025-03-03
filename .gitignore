@@ -1,1 +1,6 @@
 __pycache__/
+/venv/
+/EDMesg.egg-info/
+/build/
+/.vscode/
+/.idea/
