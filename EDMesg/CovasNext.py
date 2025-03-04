@@ -26,9 +26,15 @@ class ExternalChatNotification(EDMesgAction):
     text: str
 
 
+class ExternalBackgroundChatNotification(EDMesgAction):
+    service: str  # 'twitch', 'discord' etc
+    username: str | None = None
+    text: str
+
+
 # Factory methods
 provider_name = "COVAS_NEXT"
-actions: list[type[EDMesgAction]] = [ExternalChatNotification]
+actions: list[type[EDMesgAction]] = [ExternalChatNotification, ExternalBackgroundChatNotification]
 events: list[type[EDMesgEvent]] = [CovasReplied, CommanderSpoke, ConfigurationUpdated]
 actions_port = 15550
 events_port = 15551
