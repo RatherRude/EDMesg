@@ -1,4 +1,4 @@
-from typing import List, Literal, Union
+from typing import List, Literal, Union, Optional
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
 from .EDMesgClient import EDMesgClient
@@ -22,13 +22,13 @@ class ConfigurationUpdated(EDMesgEvent):
 
 class ExternalChatNotification(EDMesgAction):
     service: str  # 'twitch', 'discord' etc
-    username: str | None = None
+    username: Optional[str] = None
     text: str
 
 
 class ExternalBackgroundChatNotification(EDMesgAction):
     service: str  # 'twitch', 'discord' etc
-    username: str | None = None
+    username: Optional[str] = None
     text: str
 
 

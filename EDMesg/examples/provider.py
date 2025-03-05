@@ -2,8 +2,7 @@ from EDMesg.base import EDMesgWelcomeAction
 from ..EDCoPilot import (
     create_edcopilot_provider,
     SpeakingPhraseEvent,
-    OpenPanelAction,
-    PrintThisAction,
+    OpenPanelAction
 )
 from time import sleep, time
 
@@ -38,9 +37,7 @@ def main():
                 if isinstance(action, EDMesgWelcomeAction):
                     print("new client connected")
                 if isinstance(action, OpenPanelAction):
-                    open_panel(action.name)
-                if isinstance(action, PrintThisAction):
-                    print("SpeakThis: ", action.text)
+                    open_panel(action.panelName)
             sleep(0.1)
     except KeyboardInterrupt:
         print("Shutting down provider.")
