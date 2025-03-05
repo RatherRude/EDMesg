@@ -3,6 +3,12 @@ name = "EDMesg"
 version = "2025.03.04"
 dependencies = [
   "pyzmq>=26.2.0",
-  "pydantic>=2.9.1"
+  "pydantic>=2.9.1",
+  "typing-extensions>=4.12.0"
 ]
 requires-python = ">= 3.9"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0"
+]
