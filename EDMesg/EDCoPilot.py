@@ -6,7 +6,7 @@ from typing import Optional, Union, Literal, Dict
 
 
 class OpenPanelAction(EDMesgAction):
-    panelName: Literal["bookmarks","voicelog", "activity"]
+    panelName: Literal["bookmarks","bookmarkgroups","voicelog", "activity"]
 
 
 class SpeakingPhraseEvent(EDMesgEvent):
