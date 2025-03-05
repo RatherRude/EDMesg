@@ -6,7 +6,7 @@ from typing_extensions import Optional, Literal, Union, Dict, Any
 
 
 class OpenPanelAction(EDMesgAction):
-    panelName: Literal["bookmarks","voicelog", "activity"]
+    panelName: Literal["bookmarks","bookmarkgroups","voicelog", "activity"]
 
 
 class SpeakingPhraseEvent(EDMesgEvent):
