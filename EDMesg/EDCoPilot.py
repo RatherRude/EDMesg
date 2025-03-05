@@ -2,7 +2,8 @@ from pydantic import BaseModel
 from .base import EDMesgAction, EDMesgEvent
 from .EDMesgProvider import EDMesgProvider
 from .EDMesgClient import EDMesgClient
-from typing_extensions import Optional, Literal, Union, Dict, Any
+from typing import Any, Dict, Optional, Union
+from typing_extensions import Literal
 
 
 class OpenPanelAction(EDMesgAction):
