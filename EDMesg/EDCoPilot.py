@@ -7,7 +7,16 @@ from typing_extensions import Literal
 
 
 class OpenPanelAction(EDMesgAction):
-    panelName: Literal["bookmarks","bookmarkgroups","voicelog", "activity"]
+    panelName: Literal[
+            "bookmarks", "bookmarkgroups", "voicelog", "eventlog", "sessionprogress", 
+			"systemhistory", "traderoute", "discoveryestimator", "miningstats", "miningprices",
+			"placesofinterest", "locationsearch", "locationresults", "guidancecomputer", "timetrials",
+            "systeminfo", "stations", "bodies",	"factionsystems", "miningprices",
+			"stationfacts", "bodydata", "blueprints", "shiplist", "storedmodules",
+			"materials", "shiplocker", "suitlist", "weaponlist", "aboutedcopilot", "permits",
+			"messages", "prospectorannouncements", "music",	"historyrefresh",
+            "commandreference", "settings"
+                ]
 
 
 class SpeakingPhraseEvent(EDMesgEvent):
