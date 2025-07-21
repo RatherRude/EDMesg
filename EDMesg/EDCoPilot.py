@@ -23,7 +23,7 @@ class PanelNavigationAction(EDMesgAction):
     navigate: Literal[
         "scrolldown", "scrollup", "scrolltop", "scrollbottom", "back"
     ]
-    selectItem: int
+    selectItem: int|None=None
 
 
 class SpeakingPhraseEvent(EDMesgEvent):
