@@ -21,7 +21,7 @@ class OpenPanelAction(EDMesgAction):
 
 class PanelNavigationAction(EDMesgAction):
     navigate: Literal[
-        "scrolldown", "scrollup", "scrolltop", "scrollbottom", "back"
+        "scrolldown", "scrollup", "scrolltop", "scrollbottom", "back", "selectItem"
     ]
     selectItem: Union[int, None]=None
 
