@@ -71,7 +71,10 @@ class PanelOpenedEvent(EDMesgEvent):  # placeholder for future?
 
 # Factory methods
 provider_name = "EDCoPilot"
-actions: list[type[EDMesgAction]] = [OpenPanelAction]
+actions: list[type[EDMesgAction]] = [
+    OpenPanelAction,
+    PanelNavigationAction
+]
 events: list[type[EDMesgEvent]] = [
     SpeakingPhraseEvent,
     LastVisitedEvent,
