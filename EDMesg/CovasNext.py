@@ -18,6 +18,7 @@ class CommanderSpoke(EDMesgEvent):
 class ConfigurationUpdated(EDMesgEvent):
     enabled_game_events: list[str]
     is_dominant: bool
+    is_voicing_edcopilot: bool
 
 
 class ExternalChatNotification(EDMesgAction):
