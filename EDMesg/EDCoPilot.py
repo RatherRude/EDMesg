@@ -29,7 +29,7 @@ class PanelNavigationAction(EDMesgAction):
 class SpeakingPhraseEvent(EDMesgEvent):
     text: str
     reason: Union[str, Literal[
-        "covas", # speech originated from CovasNext
+        "covas", # phrase originated from CovasNext
         "info", # phrase was only printed on VoiceLog, not spoken
         # "ArrivedAtDesination", # when reached system that was plotted to
         # "ArrivedHome", # when reached system that is designated a home system
