@@ -29,19 +29,24 @@ class PanelNavigationAction(EDMesgAction):
 class SpeakingPhraseEvent(EDMesgEvent):
     text: str
     reason: Union[str, Literal[
-        "ArrivedAtDesination", # when reached system that was plotted to
-        "ArrivedHome", # when reached system that is designated a home system
-        "ChitChat", # ship chit-chat
-        "FacilitySystemReminder", # when reached system that was recommended to visit a particular facility (eg after a search)
-        "FirstVisitToStation", # when docked at station for first time
-        "HGE", # candidate system for HGEs
-        "LastHere", # when reaching a destination system
+        "covas", # speech originated from CovasNext
+        "info", # phrase was only printed on VoiceLog, not spoken
+        # "ArrivedAtDesination", # when reached system that was plotted to
+        # "ArrivedHome", # when reached system that is designated a home system
+        # "ChitChat", # ship chit-chat
+        # "FacilitySystemReminder", # when reached system that was recommended to visit a particular facility (eg after a search)
+        # "FirstVisitToStation", # when docked at station for first time
+        # "HGE", # candidate system for HGEs
+        # "LastHere", # when reaching a destination system
     ]]
     duration: float
     timestamp: str
 
+class PanelContentsEvent(EDMesgEvent):  # new EDCP 1.11.713
+    timestamp: str
+    contents: Optional[Dict[str, Any]]
 
-class LastVisitedEvent(EDMesgEvent):
+class LastVisitedEvent(EDMesgEvent): # placeholder for future?
     days_since_last_here: float
     visit_number: int
     passed_through_count: int
