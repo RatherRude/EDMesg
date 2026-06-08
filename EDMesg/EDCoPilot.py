@@ -30,7 +30,7 @@ class SpeakingPhraseEvent(EDMesgEvent):
     text: str
     reason: Union[str, Literal[
         "covas", # phrase originated from CovasNext
-        "info", # phrase was only printed on VoiceLog, not spoken
+        "edcopilot", # phrase originated from edcopilot
         # "ArrivedAtDesination", # when reached system that was plotted to
         # "ArrivedHome", # when reached system that is designated a home system
         # "ChitChat", # ship chit-chat
