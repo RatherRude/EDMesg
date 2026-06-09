@@ -46,7 +46,7 @@ class PanelContentsEvent(EDMesgEvent):  # new EDCP 1.11.713
     timestamp: str
     contents: Optional[Dict[str, Any]]
 
-class LastVisitedEvent(EDMesgEvent): # placeholder for future?
+class LastVisitedEvent(EDMesgEvent): 
     days_since_last_here: float
     visit_number: int
     passed_through_count: int
