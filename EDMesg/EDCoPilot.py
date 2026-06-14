@@ -40,6 +40,7 @@ class SpeakingPhraseEvent(EDMesgEvent):
         # "LastHere", # when reaching a destination system
     ]]
     duration: float
+    interrupt: bool
     timestamp: str
 
 class PanelContentsEvent(EDMesgEvent):  # new EDCP 1.11.713
