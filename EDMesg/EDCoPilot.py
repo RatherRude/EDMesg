@@ -31,13 +31,13 @@ class SpeakingPhraseEvent(EDMesgEvent):
     reason: Union[str, Literal[
         "covas", # phrase originated from CovasNext
         "edcopilot", # phrase originated from edcopilot
-        # "ArrivedAtDesination", # when reached system that was plotted to
-        # "ArrivedHome", # when reached system that is designated a home system
-        # "ChitChat", # ship chit-chat
-        # "FacilitySystemReminder", # when reached system that was recommended to visit a particular facility (eg after a search)
-        # "FirstVisitToStation", # when docked at station for first time
-        # "HGE", # candidate system for HGEs
-        # "LastHere", # when reaching a destination system
+        "ArrivedAtDesination", # when reached system that was plotted to
+        "ArrivedHome", # when reached system that is designated a home system
+        "ChitChat", # ship chit-chat
+        "FacilitySystemReminder", # when reached system that was recommended to visit a particular facility (eg after a search)
+        "FirstVisitToStation", # when docked at station for first time
+        "HGE", # candidate system for HGEs
+        "LastHere", # when reaching a destination system
     ]]
     duration: float
     interrupt: bool
